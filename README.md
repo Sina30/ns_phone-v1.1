@@ -1,10 +1,10 @@
 # nsPhone by nightstudios
 [![nsPhone by nightstudios](https://forum.cfx.re/uploads/default/optimized/4X/7/6/8/768834831cc5157160c76e0fa6a08dd0b9c70876_2_690x324.png)
 
-nsPhone by nightstudios
+# nsPhone by nightstudios
 This script was made for the ESX Framework and works only with this framework. We do not provide support for any other framework.
 
-Features:
+## Features:
 Compatible with ESX 1.2 (1.1 not tested)
 Compatible with ■■■■■■■■■, Mumble and ■■■■■■■■
 Low CPU usage
