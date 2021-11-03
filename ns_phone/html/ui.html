@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="nui://ns_phone/html/css/style.css" />
+  <link rel="stylesheet" href="nui://ns_phone/html/css/themify-icons.css" />
+  <link rel="stylesheet" href="nui://ns_phone/html/css/icons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>ns_phone</title>
+</head>
+
+<body style="overflow: hidden">
+  <div class="phoneWrapper d-none">
+    <div class="topIcons">
+      <div class="topLeftIcons">09:45</div>
+      <div class="topRightIcons">
+        <div class="flyMode" id="flyMode">
+          <em class="ni ni-navigate-fill"></em>
+        </div>
+        <div class="phoneReception d-none">
+          <div class="bar one"></div>
+          <div class="bar two"></div>
+          <div class="bar three"></div>
+          <div class="bar four"></div>
+        </div>
+        <div class="battery">
+          <div class="battery-level" style="height: 10%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="lockScreen">
+      <div class="lockElements">
+        <div class="lockTime">00:00</div>
+        <div class="lockDate">Monday, 1. January</div>
+        <div class="notifications">
+          <div class="lockscreenDelete">
+            <div class="lockscreenDeleteContent">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
+          <ul id="lockscreenNotifications"></ul>
+        </div>
+        <span id="lockScreenBtn">
+          <div class="lockLine"></div>
+        </span>
+      </div>
+    </div>
+    <div class="backgroundImage">
+      <div id="homescreen">
+        <div class="icons">
+          <span class="icon" id="contacts">
+            <div class="image">
+              <div class="homeIcon">
+                <em class="ni ni-contact"></em>
+              </div>
+            </div>
+            <div class="text">Contacts</div>
+          </span>
+          <span class="icon" id="settings">
+            <div class="image">
+              <div class="homeIcon">
+                <em class="ni ni-setting-alt-fill"></em>
+              </div>
+            </div>
+            <div class="text">Settings</div>
+          </span>
+          <span class="icon" id="notes">
+            <div class="image">
+              <div class="homeIcon">
+                <em class="ni ni-notes-alt"></em>
+              </div>
+            </div>
+            <div class="text">Notes</div>
+          </span>
+          <span class="icon" id="health">
+            <div class="image">
+              <div class="homeIcon">
+                <em class="ni ni-heart-fill"></em>
+              </div>
+            </div>
+            <div class="text" id="health">Health</div>
+          </span>
+        </div>
+        <div class="icons" id="icons2">
+          <span class="icon" id="emergency">
+            <div class="image">
+              <div class="homeIcon">
+                <em class="fas fa-exclamation-circle"></em>
+              </div>
+            </div>
+            <div class="text">Notrufe</div>
+          </span>
+
+        </div>
+        <div class="bottomIcons">
+          <div class="backgroundBottom">
+            <div class="icon_bottom" id="calls">
+              <div class="image">
+                <div class="homeIcon">
+                  <em class="ni ni-call"></em>
+                </div>
+              </div>
+            </div>
+            <div class="icon_bottom">
+              <div class="image" id="messages">
+                <div class="homeIcon">
+                  <em class="ni ni-msg-circle"></em>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="icon_bottom">
+              <div class="image" id="mail">
+                <div class="homeIcon">
+                  <em class="ni ni-mail"></em>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div id="settingsContent" class="contentMain d-none">
+        <div id="settingsBackground">
+          <div class="contentTitle">Settings</div>
+          <div class="contentText">
+            <ul class="settingsList">
+              <li class="settingsItemFirst">
+                <div class="helper">
+                  <img
+                    src="https://media.discordapp.net/attachments/848658396168585267/856000866652913684/L77_NS-03_Kopie4.png?width=683&height=683"
+                    class="profile_picture" />
+                </div>
+                <span class="username">John Doe</span>
+                <span class="phoneNumber" id="phoneSettings">555-5555</span>
+                <div class="helper">
+                  <img src="/html/images/icons/arrow_right.png" class="rightIcon" alt="" />
+                </div>
+              </li>
+              <li class="settingsItem settingsItemBorderRadius">
+                <div class="settingsIcon bg-orange">
+                  <em class="ni ni-navigate"></em>
+                </div>
+                Flymode
+                <label class="switch">
+                  <input type="checkbox" id="flyModeSlider" value="0" />
+                  <span class="slider round"></span>
+                </label>
+              </li>
+              <li class="settingsItem">
+                <div class="settingsIcon bg-pink">
+                  <em class="ni ni-vol"></em>
+                </div>
+                Sounds
+                <label class="switch">
+                  <input type="checkbox" id="soundsSlider" />
+                  <span class="slider round"></span>
+                </label>
+              </li>
+              <li class="settingsItem" id="settingsBackgroundChange">
+                <div class="settingsIcon bg-pink">
+                  <em class="ni ni-text-rich"></em>
+                </div>
+                Background
+                <div class="settingsIconRight">
+                  <em class="ni ni-forward-ios"></em>
+                </div>
+              </li>
+              <li class="settingsItem" id="settingsLockscreenChange">
+                <div class="settingsIcon bg-pink">
+                  <em class="ni ni-text-rich"></em>
+                </div>
+                Lockscreen
+                <div class="settingsIconRight">
+                  <em class="ni ni-forward-ios"></em>
+                </div>
+              </li>
+            </ul>
+            <span id="goBackButton">
+              <div class="lockLine2">
+                <div class="locklineIcon" id="goBackHome">
+                  <i class="fas fa-home"></i>
+                </div>
+                <div class="locklineIcon" id="goBackPrevious" data-current="settings">
+                  <i class="fas fa-chevron-left"></i>
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="contactsContent" class="contentMain d-none">
+        <div class="contentTitle">
+          Contacts
+          <div class="contactAdd" id="contactAdd">
+            <i class="ni ni-plus-circle"></i>
+          </div>
+        </div>
+        <div class="contentText">
+          <ul class="contentContacts"></ul>
+        </div>
+        <span id="goBackButton">
+          <div class="lockLine2">
+            <div class="locklineIcon" id="goBackHome">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="locklineIcon" id="goBackPrevious" data-current="contacts">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div class="contentMain d-none" id="contactAddContent">
+        <div class="contentTitle">Add contact</div>
+        <div class="contentText">
+          <div class="contactAddText">
+            <div class="contactAddImage"></div>
+            <div class="form__group field">
+              <input type="input" class="form__field" placeholder="Name" name="name" id="contactAdd_name" />
+              <label for="name" class="form__label">Name</label>
+            </div>
+            <div class="form__group field">
+              <input type="input" class="form__field" placeholder="Name" name="name" id="contactAdd_number" />
+              <label for="name" class="form__label">Number</label>
+            </div>
+            <div class="form__group field">
+              <input type="input" class="form__field" placeholder="Name" name="name" id="contactAdd_email" />
+              <label for="name" class="form__label">E-Mail</label>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-custom" id="contactAdd_confirm">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+        <span id="goBackButton">
+          <div class="lockLine2">
+            <div class="locklineIcon" id="goBackHome">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="locklineIcon" id="goBackPrevious" data-current="contactAdd">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div class="contentMain d-none" id="contactEditContent">
+        <div class="contentTitle">Edit contact</div>
+        <div class="contentText">
+          <div class="contactAddText">
+            <div class="contactAddImage"></div>
+            <div class="form__group field">
+              <input type="input" class="form__field" placeholder="Name" name="name" id="contactEdit_name" />
+              <label for="name" class="form__label">Name</label>
+            </div>
+            <div class="form__group field">
+              <input type="input" class="form__field" placeholder="Telefonnummer" name="name" id="contactEdit_number" />
+              <label for="name" class="form__label">Number</label>
+            </div>
+            <div class="form__group field">
+              <input type="input" class="form__field" placeholder="E-Mail" name="name" id="contactEdit_email" />
+              <label for="name" class="form__label">E-Mail</label>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-custom" id="contactEdit_confirm">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+        <span id="goBackButton">
+          <div class="lockLine2">
+            <div class="locklineIcon" id="goBackHome">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="locklineIcon" id="goBackPrevious" data-current="contactEdit">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div class="contentMain d-none" id="contentContactContent" data-uid="">
+        <div class="contentText contactShow">
+          <div class="contactShowEdit">Edit</div>
+          <div class="contactShowText">
+            <div class="contactShowImage"></div>
+            <div class="contactShowName"></div>
+          </div>
+          <div class="contactShowShortcuts">
+            <div class="contactShowShortcut createCall">
+              <i class="fas fa-phone"></i>
+              <p>Call</p>
+            </div>
+            <div class="contactShowShortcut createMessage">
+              <i class="fas fa-comment-alt"></i>
+              <p>Message</p>
+            </div>
+          </div>
+          <div class="contactShowPhone">
+            <div class="contactShowPhoneTitle">Private</div>
+            <div class="contactShowPhoneNumber">XXXXXXXX</div>
+          </div>
+          <div class="contactShowEmail">
+            <div class="contactShowEmailTitle">Email</div>
+            <div class="contactShowEmailNumber">XXXXXXX</div>
+          </div>
+          <div class="contactShowActions">
+            <ul class="contactShowActionList">
+              <li class="contactShowActionItem createMessage">
+                Send message
+              </li>
+              <li class="contactShowActionItem" id="shareContact">
+                Share contact
+              </li>
+              <li class="contactShowActionItem" id="favourite">
+                Save as favourite
+              </li>
+              <li class="contactShowActionItem danger" id="deleteContact">
+                Delete contact
+              </li>
+            </ul>
+          </div>
+        </div>
+        <span id="goBackButton">
+          <div class="lockLine2">
+            <div class="locklineIcon" id="goBackHome">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="locklineIcon" id="goBackPrevious" data-current="contentContact">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div id="notesContent" class="contentMain d-none">
+        <div class="contentTitle">
+          Notes
+          <div class="notesSettings" id="notesCreate">
+            <i class="fas fa-plus-circle"></i>
+          </div>
+        </div>
+        <div class="contentText">
+          <div class="contentNotes">
+            <ul class="contentNotesList"></ul>
+          </div>
+          <span id="goBackButton">
+            <div class="lockLine2">
+              <div class="locklineIcon" id="goBackHome">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="locklineIcon" id="goBackPrevious" data-current="notes">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div id="noteShowContent" class="contentMain d-none">
+        <div class="contentTitle">
+          <div class="notesDelete" id="deleteNote">Delete</div>
+          <div class="notesDone" id="updateNote">Done</div>
+        </div>
+        <div class="contentText">
+          <textarea class="note-textarea" id="noteTextAreaUpdate" cols="30" rows="10"></textarea>
+          <span id="goBackButton">
+            <div class="lockLine2">
+              <div class="locklineIcon" id="goBackHome">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="locklineIcon" id="goBackPrevious" data-current="noteShow">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div id="notesCreateContent" class="contentMain d-none">
+        <div class="contentTitle">
+          <div class="notesDone" id="saveNote">Done</div>
+        </div>
+        <div class="contentText">
+          <textarea class="note-textarea" id="noteTextAreaCreate" cols="30" rows="10"></textarea>
+          <span id="goBackButton">
+            <div class="lockLine2">
+              <div class="locklineIcon" id="goBackHome">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="locklineIcon" id="goBackPrevious" data-current="notesCreate">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div id="healthContent" class="contentMain d-none">
+        <div class="contentTitle">Health</div>
+        <div class="contentText">
+          <div class="healthInfo" id="stepsMenu">
+            <div class="healthSteps">
+              <div class="healthStepsTitle">
+                <i class="fab fa-hotjar"></i> Steps
+
+                <div class="healthStepsMore">
+                  Yesterday
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+              </div>
+              <div class="healthStepsText" id="healthSteps">
+                116 <p>Steps</p>
+              </div>
+            </div>
+          </div>
+          <div class="healthInfo">
+            <div class="healthSteps">
+              <div class="healthStepsTitle">
+                <i class="fas fa-heart"></i> Health
+
+                <div class="healthStepsMore">
+                  Yesterday
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+              </div>
+              <div class="healthStepsText" id="healthPulse">
+                100 <p>Pulse</p>
+              </div>
+            </div>
+          </div>
+          <span id="goBackButton">
+            <div class="lockLine2">
+              <div class="locklineIcon" id="goBackHome">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="locklineIcon" id="goBackPrevious" data-current="health">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div id="healthStepsContent" class="contentMain d-none">
+        <div class="contentTitle">Statistics - Steps</div>
+        <div class="contentText">
+          <div class="healthInfo" id="stepsMenu2">
+            <div class="healthSteps">
+              <div class="healthStepsTitle">
+                <i class="fab fa-hotjar"></i> Total steps
+              </div>
+              <div class="healthStepsText" id="healthStepsTotal">
+                116
+              </div>
+            </div>
+          </div>
+          <div class="healthInfo">
+            <div class="healthSteps">
+              <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+          </div>
+          <span id="goBackButton">
+            <div class="lockLine2">
+              <div class="locklineIcon" id="goBackHome">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="locklineIcon" id="goBackPrevious" data-current="healthSteps">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div id="callsContent" class="contentMain d-none">
+        <div class="contentTitle" id="callsTitle">Call list</div>
+        <div class="contentText">
+          <div class="callsContent" id="callListContent">
+            <ul class="callsContentList"></ul>
+          </div>
+          <div class="numericKeypadContent d-none" id="numericKeypadContent">
+            <div class="numericInput"></div>
+            <ul class="numericKeypadList">
+              <li class="numericKeypadItem" data-key="1">1</li>
+              <li class="numericKeypadItem" data-key="2">2</li>
+              <li class="numericKeypadItem" data-key="3">3</li>
+              <li class="numericKeypadItem" data-key="4">4</li>
+              <li class="numericKeypadItem" data-key="5">5</li>
+              <li class="numericKeypadItem" data-key="6">6</li>
+              <li class="numericKeypadItem" data-key="7">7</li>
+              <li class="numericKeypadItem" data-key="8">8</li>
+              <li class="numericKeypadItem" data-key="9">9</li>
+              <li class="numericKeypadItem">*</li>
+              <li class="numericKeypadItem" data-key="0">0</li>
+              <li class="numericKeypadItem">#</li>
+              <li class="numericKeypadItem nobg"></li>
+              <li class="numericKeypadItem bg-green" data-action="call">
+                <i class="fas fa-phone-alt"></i>
+              </li>
+              <li class="numericKeypadItem nobg2" data-action="delete">
+                <i class="fas fa-backspace"></i>
+              </li>
+            </ul>
+          </div>
+          <div class="callsBottomMenu">
+            <ul class="callsBottomList">
+              <li class="callsBottomItem active" id="callList">
+                <i class="fas fa-clock"></i>
+                <p>Call list</p>
+              </li>
+              <li class="callsBottomItem" id="numericKeypad">
+                <i class="fas fa-th"></i>
+                <p>Numeric Keypad</p>
+              </li>
+            </ul>
+          </div>
+          <span id="goBackButton">
+            <div class="lockLine2">
+              <div class="locklineIcon" id="goBackHome">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="locklineIcon" id="goBackPrevious" data-current="calls">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="d-none" id="callReceiverContent">
+        <div class="contentText">
+          <div class="callReceiverAvatar">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="callReceiverName">
+            Unknown
+            <div class="callReceiverType">Outgoing Call</div>
+          </div>
+          <div class="callReceiverCancel">
+            <i class="fas fa-phone-slash"></i>
+          </div>
+        </div>
+      </div>
+      <div class="d-none" id="callSenderContent">
+        <div class="contentText">
+          <div class="callSenderAvatar">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="callSenderName">
+            Unknown
+            <div class="callSenderType">Incoming Call</div>
+          </div>
+          <div class="callSenderAccept"><i class="fas fa-phone-alt"></i></div>
+          <div class="callSenderCancel">
+            <i class="fas fa-phone-slash"></i>
+          </div>
+        </div>
+      </div>
+      <div class="d-none" id="activeCallContent">
+        <div class="contentText">
+          <div class="activeCallAvatar">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="activeCallName">
+            Unknown
+            <div class="activeCallTime">00:00</div>
+          </div>
+          <div class="activeCallCancel">
+            <i class="fas fa-phone-slash"></i>
+          </div>
+        </div>
+      </div>
+      <div id="messagesContent" class="contentMain d-none">
+        <div class="contentTitle">
+          Messages
+          <div class="chatAdd" id="chatAdd">
+            <i class="ni ni-plus-circle"></i>
+          </div>
+        </div>
+        <div class="contentText">
+          <div class="contentMessages">
+            <ul class="contentMessagesList"></ul>
+          </div>
+        </div>
+        <span id="goBackButton">
+          <div class="lockLine2">
+            <div class="locklineIcon" id="goBackHome">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="locklineIcon" id="goBackPrevious" data-current="messages">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div id="messageSingleContent" class="contentMain d-none">
+        <div class="contentTitle" id="messageSingleTitle">Unknown</div>
+        <div class="contentText">
+          <div class="messagesSingle">
+            <ul class="messageSingleList" id="messageList"></ul>
+            <div class="form-group message-group">
+              <input class="form-control messageInput" id="messageInput" />
+              <button class="btn btn-message" id="submitMessage">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <span id="goBackButton">
+          <div class="lockLine2">
+            <div class="locklineIcon" id="goBackHome">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="locklineIcon" id="goBackPrevious" data-current="messageSingle">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div id="chatAddContent" class="contentMain d-none">
+        <div class="contentTitle" id="messageSingleTitle">
+          <input class="form-control-custom" placeholder="Receiver" id="chatAddReceiver" />
+        </div>
+        <div class="contentText">
+          <div class="messagesSingle">
+            <ul class="messageSingleList" id="messageList2"></ul>
+            <div class="form-group message-group">
+              <input class="form-control messageInput" id="chatAddMessageInput" />
+              <button class="btn btn-message" id="chatAddSubmitMessage">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <span id="goBackButton">
+          <div class="lockLine2">
+            <div class="locklineIcon" id="goBackHome">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="locklineIcon" id="goBackPrevious" data-current="chatAdd">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div id="emergencyContent" class="contentMain d-none">
+        <div class="contentTitle">
+          Emergency Call
+        </div>
+        <div class="contentText">
+          <div class="emergencyContainer">
+            <ul class="emergencyList">
+            </ul>
+          </div>
+          <div class="emergencyContainer d-none" id="sendEmergencyCall">
+            <div class="emergencyForm">
+              <div class="emergencyFormTitle">Send Emergency Call</div>
+              <input class="emergencyInput" placeholder="Nachricht">
+              <small>Your position will be submitted automatically.</small>
+              <hr class="emergencyStyle">
+              <button class="btn btn-disabled-dark" disabled="" id="emergencySubmit">Submit</button>
+            </div>
+          </div>
+        </div>
+        <span id="goBackButton">
+          <div class="lockLine2">
+            <div class="locklineIcon" id="goBackHome">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="locklineIcon" id="goBackPrevious" data-current="emergency">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div id="jobAppContent" class="contentMain d-none">
+        <div class="contentTitle">Dispatches</div>
+        <div class="contentText">
+          <div class="jobAppContainer">
+            <ul class="jobAppList">
+              <!-- <li class="jobAppItem">
+                <div class="jobAppItemSender">0123456789</div>
+                <div class="jobAppItemTime">00:30 Uhr</div>
+                <div class="jobAppItemText">Help meee!!!</div>
+              </li>
+              <li class="jobAppItem">
+                <div class="jobAppItemSender">0123456789</div>
+                <div class="jobAppItemTime">00:30 Uhr</div>
+                <div class="jobAppItemText">Help meee!!!</div>
+              </li>
+              <li class="jobAppItem">
+                <div class="jobAppItemSender">0123456789</div>
+                <div class="jobAppItemTime">00:30 Uhr</div>
+                <div class="jobAppItemText">Help meee!!!</div>
+              </li> -->
+            </ul>
+          </div>
+          <div class="jobAppBottomIcons d-none">
+            <div class="jobAppBottomIcon danger" id="deleteDispatch">
+              <i class="fas fa-trash"></i> Delete dispatch
+            </div>
+            <div class="jobAppBottomIcon" id="setWaypoint">
+              <i class="fas fa-route"></i> Set waypoint
+            </div>
+          </div>
+        </div>
+        <span id="goBackButton">
+          <div class="lockLine2">
+            <div class="locklineIcon" id="goBackHome">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="locklineIcon" id="goBackPrevious" data-current="jobApp">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+
+    <div class="shortNotificationWrapper d-none">
+      <ul class="shortNotificationList">
+        <li class="shortNotification">
+          <div class="shortNotificationHeader">
+            <div class="shortNotificationTitle"></div>
+          </div>
+          <div class="shortNotificationDescription">
+            
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="messageNotification d-none">
+      <div class="text">
+        <h4 class="messageNotificationTitle">A short Title is best</h4>
+        <p class="messageNotificationText">
+          A message should be a short, complete sentence.
+        </p>
+      </div>
+      <div class="messageNotificationField">
+        <input type="text" class="messageNotificationInput" id="messageNotificationInput" placeholder="Placeholder" />
+      </div>
+      <div class="messageNotificationButtons">
+        <span class="messageNotificationButtonFirst" id="messageNotificationCancel">Cancel</span>
+        <span class="messageNotificationButtonSecond" id="messageNotificationSubmit">Submit</span>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="nui://ns_phone/configs/config.js"></script>
+<!-- <script src="nui://ns_phone/configs/translations.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"
+  integrity="sha512-LfB+BcvR3zBt7ebVskhSWiSbEUiG3p5EcCprkieldsKhBeR6wpnLi0VpWC2GNgVGWP2n/skO8Bx2oKNjUhXCkw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="nui://ns_phone/html/ez.countimer.js"></script>
+<script src="nui://ns_phone/html/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"
+  integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"
+  integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</html>
